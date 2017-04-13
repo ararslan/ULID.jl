@@ -13,6 +13,7 @@ const _BASE = 32
 end
 
 function encodetime(now, n)
+    # now should be in milliseconds-since-epoch
     s = Vector{Char}(n)
     @inbounds for i = n:-1:1
         m = now % _BASE
@@ -38,7 +39,7 @@ Generate a Universally Unique Lexicographically Sortable Identifier
 (ULID) as a string.
 """
 function ulid()
-    now = trunc(Int, Base.Dates.datetime2unix(Base.Dates.now()))
+    now = trunc(Int, Base.Dates.datetime2unix(Base.Dates.now()) * 1000)
     return encodetime(now, 10) * encoderandom(16)
 end
 
