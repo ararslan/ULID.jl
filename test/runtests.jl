@@ -1,5 +1,5 @@
 using ULID
-using Base.Test
+using Test
 
 @testset "Pseudorandom number generation" begin
     @test isa(ULID.prng(), Float32) || isa(ULID.prng(), Float64)
